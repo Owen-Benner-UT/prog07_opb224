@@ -4,7 +4,6 @@
 // The BST should work for any data type or object.
 // Other user created objects must have the << operator overloaded for 
 // output.
-//
 
 #include <iostream>
 #include <fstream>
@@ -13,14 +12,16 @@
 using namespace std;
 
 template <typename T>
-void print(vector<T> vec){
-    for(int i = 0 ; i < vec.size() ; i++){
-        cout << vec[i] << endl;;
+void print(vector<T> vec)
+{
+    for(int i = 0 ; i < vec.size() ; i++)
+    {
+        cout << vec[i] << endl;
     }
 }
 
-int main() {
-
+int main()
+{
     ifstream inFile;
     inFile.open("test.txt");
 
@@ -28,7 +29,8 @@ int main() {
    
     string s;
     inFile >> s;
-    while (inFile) {;
+    while (inFile)
+    {
         cout << "inserting ... " << s << endl;
         bst.insertItem(s);
         inFile >> s;
@@ -54,6 +56,4 @@ int main() {
     cout << endl;
     cout << "number of nodes in tree after delete is " << bst.countNodes() << endl;
     cout << endl;
-
 }
-
