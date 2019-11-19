@@ -272,7 +272,15 @@ bool BST_312 <ItemType>::isFull() const
 template<class ItemType>
 void BST_312 <ItemType>::insertItem(TreeNode*& t, const ItemType& newItem)
 {
-    if(newItem < t->data)
+    if(t == NULL)
+    {
+        TreeNode * node = new TreeNode;
+        node->data = newItem;
+        node->left = NULL;
+        node->right = NULL;
+        t = node;
+    }
+    else if(newItem < t->data)
         if(t->left != NULL)
             insertItem(t->left, newItem);
         else
@@ -322,11 +330,11 @@ int BST_312 <ItemType>::countNodes()
 template<class ItemType>
 void BST_312 <ItemType>::preOrderTraversal(TreeNode* t,vector<ItemType>& result) const
 {
-    vector<ItemType> out;
-    out.push_back(t->data);
-    out.push_back(t->left->data);
-    out.push_back(t->right->data);
-    result = out;
+    result.push_back(t->data);
+    if(t->left != NULL)
+        preOrderTraversal(t->left, result);
+    if(t->right != NULL)
+        preOrderTraversal(t->right, result);
 }
 
 template<class ItemType>
@@ -340,11 +348,11 @@ vector<ItemType> BST_312 <ItemType>::preOrderTraversal()
 template<class ItemType>
 void BST_312 <ItemType>::inOrderTraversal(TreeNode* t,vector<ItemType>& result) const
 {
-    vector<ItemType> out;
-    out.push_back(t->left->data);
-    out.push_back(t->data);
-    out.push_back(t->right->data);
-    result = out;
+    if(t->left != NULL)
+        inOrderTraversal(t->left, result); 
+    result.push_back(t->data);
+    if(t->right != NULL)
+        inOrderTraversal(t->right, result);
 }
 
 template<class ItemType>
@@ -358,11 +366,11 @@ vector<ItemType> BST_312 <ItemType>::inOrderTraversal()
 template<class ItemType>
 void BST_312 <ItemType>::postOrderTraversal(TreeNode* t,vector<ItemType>& result) const
 {
-    vector<ItemType> out;
-    out.push_back(t->left->data);
-    out.push_back(t->right->data);
-    out.push_back(t->data);
-    result = out;
+    if(t->left != NULL)
+        postOrderTraversal(t->left, result);
+    if(t->right != NULL)
+        postOrderTraversal(t->right, result);
+    result.push_back(t->data);
 }
 
 template<class ItemType>
