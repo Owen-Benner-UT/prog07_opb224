@@ -83,7 +83,7 @@ Postconditions: returns the number of nodes in the BST
 /****************************
 preOrderTraversal
 
-Function: Returns the preOder (Node, Left, Right) as a vector of ItemTypes
+Function: Returns the preOrder (Node, Left, Right) as a vector of ItemTypes
 Preconditions: BST has been initialized.
 Postconditions: none
 *****************************/
@@ -92,7 +92,7 @@ Postconditions: none
 /****************************
 inOrderTraversal
 
-Function: Returns the inOder (Left, Node, Right) as a vector of ItemTypes
+Function: Returns the inOrder (Left, Node, Right) as a vector of ItemTypes
 Preconditions: BST has been initialized.
 Postconditions: none
 *****************************/
@@ -101,7 +101,7 @@ Postconditions: none
 /****************************
 postOrderTraversal
 
-Function: returns the postOder (Left, Right, Node) as a vector of ItemTypes
+Function: Returns the postOrder (Left, Right, Node) as a vector of ItemTypes
 Preconditions: BST has been initialized.
 Postconditions: none
 *****************************/
@@ -235,7 +235,11 @@ void BST_312 <ItemType>::deleteItem(const ItemType& newItem)
 template<class ItemType>
 void BST_312 <ItemType>::makeEmpty(TreeNode*& t)
 {
-    //YOUR CODE GOES HERE
+    if(t->left != NULL)
+        makeEmpty(t->left);
+    if(t->right != NULL)
+        makeEmpty(t->right);
+    delete t;
 }
 
 template<class ItemType>
@@ -269,13 +273,34 @@ bool BST_312 <ItemType>::isFull() const
 template<class ItemType>
 void BST_312 <ItemType>::insertItem(TreeNode*& t, const ItemType& newItem)
 {
-    //YOUR CODE GOES HERE
+    if(newItem < t->data)
+        if(t->left != NULL)
+            insertItem(t->left, newItem);
+        else
+        {
+            TreeNode * node = new TreeNode;
+            node->data = newItem;
+            node->left = NULL;
+            node->right = NULL;
+            t->left = node;
+        }
+    else
+        if(t->right != NULL)
+            insertItem(t->right, newItem);
+        else
+        {
+            TreeNode * node = new TreeNode;
+            node->data = newItem;
+            node->left = NULL;
+            node->right = NULL;
+            t->right = node;
+        }
 }
 
 template<class ItemType>
 void BST_312 <ItemType>::insertItem(const ItemType& newItem)
 {
-    //YOUR CODE GOES HERE
+    insertItem(root, newItem);
 }
 
 template<class ItemType>
