@@ -306,13 +306,18 @@ void BST_312 <ItemType>::insertItem(const ItemType& newItem)
 template<class ItemType>
 int BST_312 <ItemType>::countNodes(TreeNode* t) const
 {
-    //YOUR CODE GOES HERE
+    int out = 1;
+    if(t->left != NULL)
+        out += countNodes(t->left);
+    if(t->right != NULL)
+        out += countNodes(t->right);
+    return out;
 }
 
 template<class ItemType>
 int BST_312 <ItemType>::countNodes()
 {
-    //YOUR CODE GOES HERE
+    countNodes(root);
 }
 
 template<class ItemType>
