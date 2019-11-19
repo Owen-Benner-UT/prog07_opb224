@@ -114,7 +114,6 @@ Function: Determines if a given Item is in tree.
 Preconditions: BST has been initialized.
 Postconditions: none
 *****************************/
-
     bool isItemInTree(const ItemType& item);
 
 private:
@@ -377,7 +376,32 @@ vector<ItemType> BST_312 <ItemType>::postOrderTraversal()
 template<class ItemType>
 bool BST_312 <ItemType>::isItemInTree(const ItemType& item)
 {
-  //YOUR CODE GOES HERE
+    TreeNode * t = root;
+    bool out;
+    bool ctn = true;
+    while(ctn)
+        if(item == t->data)
+        {
+            out = true;
+            ctn = false;
+        }
+        else if(item < t->data)
+            if(t->left != NULL)
+                t = t->left;
+            else
+            {
+                out = false;
+                ctn = false;
+            }
+        else
+            if(t->right != NULL)
+                t = t->right;
+            else
+            {
+                out = false;
+                ctn = false;
+            }
+    return out;
 }
 
 #endif
