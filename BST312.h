@@ -234,9 +234,9 @@ void BST_312 <ItemType>::deleteItem(const ItemType& newItem)
 template<class ItemType>
 void BST_312 <ItemType>::makeEmpty(TreeNode*& t)
 {
-    if(t == NULL)
+    if(t == NULL) //Prevent segfault.
         return;
-    if(t->left != NULL)
+    if(t->left != NULL) //Recursively delete tree.
         makeEmpty(t->left);
     if(t->right != NULL)
         makeEmpty(t->right);
@@ -274,7 +274,7 @@ bool BST_312 <ItemType>::isFull() const
 template<class ItemType>
 void BST_312 <ItemType>::insertItem(TreeNode*& t, const ItemType& newItem)
 {
-    if(t == NULL)
+    if(t == NULL) //Insert first item.
     {
         TreeNode * node = new TreeNode;
         node->data = newItem;
@@ -283,9 +283,9 @@ void BST_312 <ItemType>::insertItem(TreeNode*& t, const ItemType& newItem)
         t = node;
     }
     else if(newItem < t->data)
-        if(t->left != NULL)
+        if(t->left != NULL) //Recursively navigate tree.
             insertItem(t->left, newItem);
-        else
+        else //Insert item.
         {
             TreeNode * node = new TreeNode;
             node->data = newItem;
@@ -315,10 +315,10 @@ void BST_312 <ItemType>::insertItem(const ItemType& newItem)
 template<class ItemType>
 int BST_312 <ItemType>::countNodes(TreeNode* t) const
 {
-    if(t == NULL)
+    if(t == NULL) //Prevent segfault.
         return 0;
-    int out = 1;
-    if(t->left != NULL)
+    int out = 1; //Count this node.
+    if(t->left != NULL) //Recursively count children;
         out += countNodes(t->left);
     if(t->right != NULL)
         out += countNodes(t->right);
@@ -334,10 +334,10 @@ int BST_312 <ItemType>::countNodes()
 template<class ItemType>
 void BST_312 <ItemType>::preOrderTraversal(TreeNode* t,vector<ItemType>& result) const
 {
-    if(t == NULL)
+    if(t == NULL) //Prevent segfault.
         return;
-    result.push_back(t->data);
-    if(t->left != NULL)
+    result.push_back(t->data); //Add this node.
+    if(t->left != NULL) //Recursively add children.
         preOrderTraversal(t->left, result);
     if(t->right != NULL)
         preOrderTraversal(t->right, result);
@@ -354,11 +354,11 @@ vector<ItemType> BST_312 <ItemType>::preOrderTraversal()
 template<class ItemType>
 void BST_312 <ItemType>::inOrderTraversal(TreeNode* t,vector<ItemType>& result) const
 {
-    if(t == NULL)
+    if(t == NULL) //Prevent segfault.
         return;
-    if(t->left != NULL)
+    if(t->left != NULL) //Recursively add children.
         inOrderTraversal(t->left, result); 
-    result.push_back(t->data);
+    result.push_back(t->data); //Add this node.
     if(t->right != NULL)
         inOrderTraversal(t->right, result);
 }
@@ -374,13 +374,13 @@ vector<ItemType> BST_312 <ItemType>::inOrderTraversal()
 template<class ItemType>
 void BST_312 <ItemType>::postOrderTraversal(TreeNode* t,vector<ItemType>& result) const
 {
-    if(t == NULL)
+    if(t == NULL) //Prevent segfault.
         return;
-    if(t->left != NULL)
+    if(t->left != NULL) //Recursively add children.
         postOrderTraversal(t->left, result);
     if(t->right != NULL)
         postOrderTraversal(t->right, result);
-    result.push_back(t->data);
+    result.push_back(t->data); //Add this node.
 }
 
 template<class ItemType>
@@ -395,20 +395,20 @@ template<class ItemType>
 bool BST_312 <ItemType>::isItemInTree(const ItemType& item)
 {
     TreeNode * t = root;
-    if(t == NULL)
+    if(t == NULL) //Prevent segfault.
         return false;
     bool out;
-    bool ctn = true;
+    bool ctn = true; //Will be switched when search concludes.
     while(ctn)
-        if(item == t->data)
+        if(item == t->data) //Item found.
         {
             out = true;
             ctn = false;
         }
         else if(item < t->data)
-            if(t->left != NULL)
+            if(t->left != NULL) //Continue search.
                 t = t->left;
-            else
+            else //Item should be here.
             {
                 out = false;
                 ctn = false;
